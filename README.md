@@ -1,128 +1,138 @@
-# 📝 Resume Builder and Analyzer
+# Resume Builder and Analyzer
 
-A full-stack AI-powered web application to build professional resumes and analyze them against job descriptions for compatibility, relevance, and ATS optimization.
+## Project Description
+Resume Builder and Analyzer is a full-stack AI-powered web application designed to help users create professional resumes and analyze them for compatibility with job descriptions. The platform leverages advanced AI models to generate content, assess resume quality, and provide actionable feedback for job seekers, students, and career professionals.
 
 ---
 
-## 🚀 Features
+## Project Details
 
-### ✅ User Authentication
-- Secure registration and login using **bcrypt**.
+### User Authentication
+- Secure registration and login using bcrypt.
 - Enforces strong password policy.
-- Stores user credentials in **MongoDB**.
+- User credentials are stored securely in MongoDB.
 
-### 📝 Resume Builder
-- Collects comprehensive user information:
-  - Personal details, skills, experience, education, projects, certifications, etc.
-- AI-generated summaries using **Gemini API**:
-  - “About Me”
-  - Projects
-  - Work experience
-  - Internships
-- Upload profile image (converted to base64).
-- Choose from **3 modern HTML resume templates**:
-  - `resume1`, `resume2`, `resume3`
+### Resume Builder
+- Collects comprehensive user information: personal details, skills, experience, education, projects, certifications, and more.
+- AI-generated summaries for sections like "About Me," projects, and work experience using the Gemini API.
+- Profile image upload and conversion to base64.
+- Offers three modern HTML resume templates for customization.
 
-### 📊 Resume Analyzer (ATS Compatibility Checker)
-- Upload one or multiple **PDF resumes**.
-- Input a **job description**.
-- Resume content is parsed and matched against the JD using **semantic similarity** (Sentence-BERT).
-- Detailed analysis:
-  - Match percentage
-  - Keyword optimization
-  - Suggestions for improvement
-  - Resume length and structure feedback
+### Resume Analyzer (ATS Compatibility Checker)
+- Upload one or multiple PDF resumes.
+- Input a job description for analysis.
+- Parses and matches resume content against the job description using semantic similarity (Sentence-BERT).
+- Provides detailed analysis: match percentage, keyword optimization, improvement suggestions, and feedback on resume structure.
 
-### 🤖 AI Integration
-- Uses **Google Gemini API** for natural language generation.
-- Implements **Sentence-BERT (all-MiniLM-L6-v2)** from HuggingFace to compute cosine similarity between resumes and job descriptions.
+### AI Integration
+- Utilizes Google Gemini API for natural language generation.
+- Implements Sentence-BERT (all-MiniLM-L6-v2) for semantic analysis and ranking.
 
 ---
 
-## 🧠 How It Works
-
-### Backend Flow
-1. **User Signup/Login**:  
-   User info is stored securely with bcrypt-hashed passwords.
-
-2. **Resume Creation**:
-   - Resume data is collected via JSON payload.
-   - Gemini API generates natural summaries.
-   - Resume HTML is rendered using selected template.
-   - Resume data saved in MongoDB.
-
-3. **Resume Analysis**:
-   - User uploads PDFs and provides a job description.
-   - Extracts resume text using `pdfplumber`.
-   - Embeds both resume and job description using Sentence-BERT.
-   - Calculates similarity score and provides recommendations.
+## Tech Stack
+- **Backend:** Flask (Python)
+- **Database:** MongoDB
+- **Authentication:** bcrypt
+- **AI/NLP:** Google Gemini API, Sentence-BERT (HuggingFace)
+- **PDF Processing:** pdfplumber
+- **Image Processing:** Pillow, Base64
+- **Frontend:** HTML templates
+- **Other:** CORS
 
 ---
 
-## 🧩 Technologies Used
+## Getting Started
 
-| Technology        | Purpose                                |
-|-------------------|----------------------------------------|
-| Flask             | Web framework                          |
-| MongoDB           | NoSQL database for user/resume storage |
-| bcrypt            | Secure password hashing                |
-| pdfplumber        | Extracts text from uploaded PDFs       |
-| Pillow            | Image manipulation and conversion      |
-| Base64            | Encoding uploaded profile images       |
-| Google Gemini API | AI-generated summaries                 |
-| Sentence-BERT     | Semantic analysis for resume ranking   |
-| CORS              | Cross-origin request support           |
-
----
-
-## 💡 Use Cases
-
-- 🎯 Job Seekers: Build and analyze resumes tailored to job descriptions.
-- 🎓 Students: Highlight projects and internships with AI assistance.
-- 💼 Career Coaches: Help clients improve resumes with concrete suggestions.
-- 🧑‍💼 Recruiters: Batch analyze candidate resumes for role alignment.
-
----
-
-## 📌 Future Improvements
-
-- [ ] PDF export for generated resumes
-- [ ] Real-time job description scraping from job boards
-- [ ] Resume editing assistant (chatbot style)
-- [ ] User dashboard for managing resumes
-- [ ] Multi-language support
-
----
-
-## ⚙️ How to Run
-
-### 🛠 Prerequisites
-- Python 3.8+
-- MongoDB (local or cloud instance like MongoDB Atlas)
+### Prerequisites
+- Python 3.8 or higher
+- MongoDB (local or cloud instance, e.g., MongoDB Atlas)
 - Gemini API Key (for AI-generated content)
 
-### 📥 Installation
+### Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/TensoRag/Resume-Builder-and-Analyzer.git
+   cd Resume-Builder-and-Analyzer
+   ```
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Set environment variables:**
+   Create a `.env` file in the root directory and add:
+   ```bash
+   MONGO_URI=mongodb+srv://<your-connection-string>
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+4. **Run the Flask server:**
+   ```bash
+   python App.py
+   ```
+5. **Open your browser:**
+   Visit `http://localhost:5000`
 
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/resume-builder-analyzer.git
-cd resume-builder-analyzer
+---
+
+## Usage
+- Register or log in to your account.
+- Build your resume by entering your details and selecting a template.
+- Download or analyze your resume by uploading it along with a job description.
+- Review the analysis and suggestions to improve your resume's compatibility with job descriptions.
+
+---
+
+## Project Structure
 ```
-2. **Install dependencies**
-```bash
-pip install -r requirements.txt
+Resume-Builder-and-Analyzer/
+│
+├── App.py                  # Main Flask application
+├── requirements.txt        # Python dependencies
+├── README.md               # Project documentation
+├── logo.png                # Project logo
+├── home.html               # Home page template
+├── login.html              # Login page template
+├── Resume_ATS.html         # Resume analysis page
+├── Resume_Details.html     # Resume details page
+│
+├── sample resumes/         # Sample PDF resumes for testing
+│   ├── C1061.pdf
+│   ├── C1070.pdf
+│   ├── C1080.pdf
+│   ├── C1161.pdf
+│   └── C1164.pdf
+│
+├── templates/              # Resume templates and images
+│   ├── Resume_Template1.html
+│   ├── Resume_Template2.html
+│   ├── Resume_Template3.html
+│   ├── Resume1.png
+│   ├── Resume2.png
+│   └── Resume3.png
 ```
-3. **Set environment variables**
-   Create a .env file in the root directory and add:
-```bash
-MONGO_URI=mongodb+srv://<your-connection-string>
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-4. **Run the Flask server**
-   Create a .env file in the root directory and add:
-```bash
-python App.py
-```
-5. **Open your browser**
-```bash
-http://localhost:5000
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+1. Fork the repository
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Open a pull request describing your changes.
+
+---
+
+## Contact
+- **GitHub:** [https://github.com/TensoRag](https://github.com/TensoRag)
+- **Email:** denistanb05@gmail.com
