@@ -52,7 +52,7 @@ Resume Builder and Analyzer is a full-stack AI-powered web application designed 
 ### Installation
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/TensoRag/Resume-Builder-and-Analyzer.git
+   git clone https://github.com/DCode-v05/Resume-Builder-and-Analyzer.git
    cd Resume-Builder-and-Analyzer
    ```
 2. **Install dependencies:**
@@ -134,5 +134,5 @@ Contributions are welcome! To contribute:
 ---
 
 ## Contact
-- **GitHub:** [https://github.com/TensoRag](https://github.com/TensoRag)
+- **GitHub:** [https://github.com/DCode-v05](https://github.com/DCode-v05)
 - **Email:** denistanb05@gmail.com
