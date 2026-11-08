@@ -7,8 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <style>
-        * {
+    <style>        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -227,14 +226,13 @@
             background-color: #e8f0fe;
         }
 
-        /* Adjust upload container to manage spacing */
         .upload-container {
             text-align: center;
             margin: 20px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px; /* Space between upload-box and remove button */
+            gap: 10px;
         }
 
         .upload-box {
@@ -250,10 +248,9 @@
             transition: 0.3s ease;
             position: relative;
             background-color: #f9f9f9;
-            overflow: hidden; /* Prevent overflow */
+            overflow: hidden;
         }
 
-        /* Style the upload text */
         #uploadText {
             font-size: 1rem;
             color: #34495e;
@@ -262,32 +259,28 @@
             margin: 0;
         }
 
-        /* Group for image preview */
         .image-preview-group {
             width: 100%;
-            height: 100%; /* Fill the upload-box */
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center image within group */
+            justify-content: center;
         }
 
-        /* Ensure preview image fills the container */
         #previewImage {
             width: 100%;
-            height: 100%; /* Use full height of upload-box */
-            object-fit: cover; /* Cover the area, cropping if needed */
+            height: 100%;
+            object-fit: cover;
             border-radius: 10px;
         }
 
-        /* Style the remove button below the upload box */
         #removeImage {
             padding: 5px 15px;
             font-size: 0.9rem;
             margin-top: 10px;
         }
 
-        /* Hide upload text when image is present */
         .upload-box.has-image #uploadText {
             display: none;
         }
@@ -323,7 +316,6 @@
             background-color: #c0392b;
         }
     
-        /* Animations */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -378,7 +370,6 @@
             }
         }
     
-        /* Responsive adjustments */
         @media (max-width: 1800px) {
             .form-row .input-group {
                 min-width: calc(25% - 2rem);
@@ -426,7 +417,6 @@
             }
         }
     
-        /* Ultra-wide screen support */
         @media (min-width: 2400px) {
             .navbar, .container {
                 max-width: 2800px;
@@ -437,7 +427,6 @@
             }
         }
     
-        /* Print styles */
         @media print {
             body {
                 background: none;
@@ -474,7 +463,6 @@
             border: 1px solid red;
         }
     
-        /* Chatbot Styles */
         .chatbot-btn {
             position: fixed;
             bottom: 20px;
@@ -509,7 +497,7 @@
         }
     
         .refresh-btn {
-            right: 40px; /* Positioned to the left of the close button */
+            right: 40px;
         }
     
         .close-btn:hover, .refresh-btn:hover {
@@ -548,7 +536,7 @@
             text-align: center;
             font-size: 1.2rem;
             font-weight: 600;
-            position: relative; /* For positioning buttons */
+            position: relative;
         }
     
         .chatbot-body {
@@ -603,7 +591,6 @@
             background: linear-gradient(-45deg, #ee7752, #e73c7e);
         }
     
-        /* Entry-Specific Styling for Education, Work Experience, Projects, Internships and Certificatiosn */
         .education-entry {
             background: linear-gradient(135deg, rgba(255, 245, 230, 0.9), rgba(255, 255, 255, 0.9));
             border: 2px solid #23a6d5;
@@ -679,36 +666,31 @@
             box-shadow: 0 6px 18px rgba(35, 166, 213, 0.3);
         }
 
-        /* Container for checkbox and input to sit inline */
         .checkbox-with-input {
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between checkbox and input */
+            gap: 10px;
         }
 
 
-        /* Override hidden class for inline behavior */
         .other-input:not(.hidden) {
-            width: 350px; /* Expand to full width when visible */
+            width: 350px;
             opacity: 1;
         }
 
-        /* Style for the date input group */
         .date-group {
             display: flex;
-            justify-content: space-between; /* Spread From and To sections */
-            align-items: flex-start; /* Align items at the top */
-            gap: 20px; /* Space between From and To */
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
         }
 
-        /* Style for each date pair (label, input, error) */
         .date-pair {
             display: flex;
-            flex-direction: column; /* Stack label, input, and error vertically */
-            width: 48%; /* Slightly less than 50% to account for gap */
+            flex-direction: column;
+            width: 48%;
         }
 
-        /* Style for the date label */
         .date-label {
             margin-right: 10px;
             color: #34495e;
@@ -718,56 +700,53 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Ensure error messages stay below their respective inputs */
         .date-pair .error-message {
             display: block;
             color: red;
             font-size: 0.9em;
             margin-top: 5px;
             min-height: 20px;
-            text-align: left; /* Align error text under its input */
+            text-align: left;
         }
 
-        /* Enhance existing .input-group.error to include date inputs */
         .input-group.error input,
         .input-group.error select,
         .input-group.error textarea,
         .date-pair.error input[type="month"] {
-            border: 2px solid red; /* Red border for error state */
+            border: 2px solid red;
         }
 
-        /* Optional: Add a class to date-pair when it has an error */
         .date-pair.error .error-message {
-            display: block; /* Ensure error message is visible */
+            display: block;
         }
 
         .template-container {
             display: flex;
-            flex-direction: row; /* Arrange items horizontally in a row */
-            justify-content: space-between; /* Distribute items evenly across the container */
-            gap: 15px; /* Space between columns */
-            max-width: 1200px; /* Optional: Limit container width */
-            margin: 0 auto; /* Optional: Center the container */
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .template-option {
             display: flex;
-            flex-direction: column; /* Stack radio button and image vertically within each column */
-            align-items: center; /* Center items within each column */
-            flex: 1; /* Each column takes equal space */
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
         }
 
         .template-image {
-            width: 200px; /* Set desired width */
-            height: 200px; /* Set desired height */
-            object-fit: cover; /* Ensure the image scales nicely */
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
         }
 
         .button-group {
             margin-top: 15px;
             display: flex;
-            justify-content: space-between; /* Align Previous and Next buttons on opposite ends */
-            gap: 10px; /* Space between buttons */
+            justify-content: space-between;
+            gap: 10px;
         }
     </style>
 </head>
@@ -781,7 +760,6 @@
     </nav>
 
     <form action="/resume" method="POST" enctype="multipart/form-data">     
-        <!-- Step 1: Personal Information -->
         <div class="container" id="step1">
             <h2>Personal Information</h2>
             <div class="form-row">
@@ -840,7 +818,6 @@
             </div>
         </div>
 
-        <!-- Step 2: Education -->
         <div class="container hidden" id="step2">
             <h2>Education</h2>
             <div id="education-entries">
@@ -915,7 +892,6 @@
             </div>
         </div>
 
-        <!-- Step 3: Work Experience -->
         <div class="container hidden" id="step3">
             <h2>Work Experience</h2>
             <div id="work-experience">
@@ -978,7 +954,6 @@
             </div>
         </div>
 
-        <!-- Step 4: Projects -->
         <div class="container hidden" id="step4">
             <h2>Projects</h2>
             <div id="project-entries">
@@ -1027,7 +1002,6 @@
             </div>
         </div>
 
-        <!-- Step 5: Internships -->
         <div class="container hidden" id="step5">
             <h2>Internships</h2>
             <div id="internships">
@@ -1065,7 +1039,6 @@
             </div>
         </div>
 
-        <!-- Step 6: Skills -->
         <div class="container hidden" id="step6">
             <h2>Skills</h2>
             <div class="input-group">
@@ -1096,7 +1069,6 @@
             </div>
         </div>
 
-        <!-- Step 7: Certifications -->
         <div class="container hidden" id="step7">
             <h2>Certifications</h2>
             <div id="certifications">
@@ -1129,7 +1101,6 @@
             </div>
         </div>
 
-        <!-- Step 8: Languages Known -->
         <div class="container hidden" id="step8">
             <h2>Languages Known</h2><br>
             <div class="input-group">
@@ -1155,7 +1126,6 @@
             </div>
         </div>
 
-        <!-- Step 9: Image Upload -->
         <div class="container hidden" id="step9">
             <h2>Upload Your Profile Photo</h2><br>
             <div class="upload-container" id="drop-area">
@@ -1180,7 +1150,6 @@
             </div>
         </div>
 
-        <!-- Step 10: Template -->
         <div class="container hidden" id="step10">
             <h2>Choose Template</h2><br>
             <div class="template-container">
@@ -1207,7 +1176,6 @@
         </div>
     </form>
 
-    <!-- Chatbot UI -->
     <div class="chatbot-btn" onclick="toggleChatbot()">
         <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat Icon">
     </div>
@@ -1234,7 +1202,6 @@
         let intership_entries = [];
         let certificates_centries = [];
 
-        // Date and Time
         function updateDateTime() {
             const now = new Date();
             const istOffset = 5.5 * 60 * 60 * 1000;
@@ -1245,26 +1212,22 @@
         setInterval(updateDateTime, 1000);
         updateDateTime();
 
-        // Replace the existing nextStep function with this updated version
         function changeStep(current, target) {
             document.getElementById('step' + current).classList.add('hidden');
             document.getElementById('step' + target).classList.remove('hidden');
             currentStep = target;
         }
 
-        // New function for moving to the previous step
         function previousStep(step) {
             changeStep(currentStep, step);
 }
 
-        // Next Step
         function nextStep(step) {
             document.getElementById('step' + currentStep).classList.add('hidden');
             document.getElementById('step' + step).classList.remove('hidden');
             currentStep = step;
         }
 
-        // Education
         function checkDegree(select) {
             const index = select.id.split('-')[1];
             const degree = select.value;
@@ -1366,7 +1329,6 @@
             button.parentElement.remove();
         }
 
-        // Work Experience
         function addExperience() {
             const container = document.getElementById('work-experience');
             const newEntry = document.createElement("div");
@@ -1447,7 +1409,7 @@
                 const otherCheckbox = entry.querySelector(`#other-checkbox-${index}`);
                 if (otherCheckbox && otherCheckbox.checked) {
                     const customResponsibility = entry.querySelector(`#other-responsibility-${index}`).value.trim();
-                    if (customResponsibility) { // Only add if not empty
+                    if (customResponsibility) {
                         responsibilities.push(customResponsibility);
                     }
                 }
@@ -1458,8 +1420,7 @@
         }
 
         function toggleOtherInput(checkbox) {
-            // Extract index from the checkbox ID (assuming format like "other-checkbox-0")
-            const index = checkbox.id.split('-').pop(); // Gets the number after the last hyphen
+            const index = checkbox.id.split('-').pop();
             const otherInputGroup = document.getElementById(`other-responsibility-group-${index}`);
             if (checkbox.checked) {
                 otherInputGroup.classList.remove('hidden');
@@ -1469,7 +1430,6 @@
             }
         }
 
-        // Projects
         function addProject() {
             const container = document.getElementById('project-entries');
             const newEntry = document.createElement("div");
@@ -1535,7 +1495,6 @@
             return projectsData;
         }
 
-        // Internships
         function addInternship() {
             const container = document.getElementById('internships');
             const newEntry = document.createElement("div");
@@ -1589,7 +1548,6 @@
             button.parentElement.remove();
         }
 
-        // Skills
         function toggleOtherSkillInput(checkbox) {
             const otherInputGroup = document.getElementById('other-skill-group');
             if (checkbox.checked) {
@@ -1609,7 +1567,7 @@
             const otherCheckbox = document.getElementById('other-checkbox-skills');
             if (otherCheckbox && otherCheckbox.checked) {
                 const customSkill = document.getElementById('other-skill').value.trim();
-                if (customSkill) { // Only add if not empty
+                if (customSkill) {
                     values.push(customSkill);
                 }
             }
@@ -1617,7 +1575,6 @@
             return values;
         }
 
-        // Certifications
         function addCertification() {
             const container = document.getElementById('certifications');
             const newEntry = document.createElement("div");
@@ -1665,7 +1622,6 @@
             button.parentElement.remove();
         }
 
-        // Languages
         function toggleOtherLanguageInput(checkbox) {
             const otherInputGroup = document.getElementById('other-language-group');
             if (checkbox.checked) {
@@ -1685,7 +1641,7 @@
             const otherCheckbox = document.getElementById('other-checkbox-languages');
             if (otherCheckbox && otherCheckbox.checked) {
                 const customLanguage = document.getElementById('other-language').value.trim();
-                if (customLanguage) { // Only add if not empty
+                if (customLanguage) {
                     values.push(customLanguage);
                 }
             }
@@ -1693,7 +1649,6 @@
             return values;
         }
 
-        // Image Upload
         const imageUpload = document.getElementById("imageUpload");
         const dropArea = document.getElementById("drop-area");
         const previewImage = document.getElementById("previewImage");
@@ -1729,9 +1684,9 @@
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     previewImage.src = event.target.result;
-                    imageGroup.classList.remove("hidden"); // Show image group
-                    uploadBox.classList.add("has-image"); // Hide upload text
-                    removeButton.classList.remove("hidden"); // Show remove button
+                    imageGroup.classList.remove("hidden");
+                    uploadBox.classList.add("has-image");
+                    removeButton.classList.remove("hidden");
                     imageBuffer = event.target.result;
                 };
                 reader.onerror = function() {
@@ -1745,22 +1700,20 @@
 
         function removeImage() {
             previewImage.src = "";
-            imageGroup.classList.add("hidden"); // Hide image group
-            uploadBox.classList.remove("has-image"); // Show upload text
-            removeButton.classList.add("hidden"); // Hide remove button
+            imageGroup.classList.add("hidden");
+            uploadBox.classList.remove("has-image");
+            removeButton.classList.add("hidden");
             imageUpload.value = "";
             imageBuffer = null;
         }
 
 
-        // Template
         function collectTemplate() {
             const selectedTemplateRadio = document.querySelector('input[name="template"]:checked');
             let templateValue = selectedTemplateRadio ? selectedTemplateRadio.value : '';
             return templateValue;
         }
 
-        // Form Submission
         function detailsStore() {
             const details = {
                 name: document.getElementById('name').value,
@@ -1799,14 +1752,12 @@
             });
         }
 
-        // Counter for dynamic entries
         let educationCount = 1;
         let experienceCount = 1;
         let projectCount = 1;
         let internshipCount = 1;
         let certificationCount = 1;
 
-        // Helper Functions
         function clearErrors(container) {
             container.querySelectorAll('.error-message').forEach(span => span.textContent = '');
             container.querySelectorAll('.input-group').forEach(group => group.classList.remove('error'));
@@ -1819,7 +1770,6 @@
             inputGroup.classList.add('error');
         }
 
-        // Validation Functions
         function validatePersonal() {
             const container = document.getElementById('step1');
             clearErrors(container);
@@ -2024,7 +1974,6 @@
             return isValid;
         }
 
-        // Chatbot Functions
         function toggleChatbot() {
             const chatbotWindow = document.getElementById('chatbotWindow');
             chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';

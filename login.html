@@ -324,7 +324,7 @@
             position: fixed;
             top: 20px;
             right: 100px;
-            width: 200px; /* Adjust size as needed */
+            width: 200px;
             height: auto;
             z-index: 1001;
             animation: pulse 2s infinite;
@@ -338,7 +338,7 @@
 
         @media (max-width: 768px) {
             .logo1 {
-                width: 100px; /* Adjust size for smaller screens */
+                width: 100px;
                 right: 15px;
             }
         }
@@ -346,12 +346,12 @@
         .footer {
             text-align: center;
             margin-top: 700px;
-            margin-bottom: 0; /* Remove extra space below footer */
+            margin-bottom: 0;
             color: black;
             font-size: 26px;
             position: fixed;
             z-index: 1;
-            padding-bottom: 20px; /* Ensure some padding inside footer */
+            padding-bottom: 20px;
         }
 
         .footer strong {
@@ -370,7 +370,6 @@
     </style>
 </head>
 <body>
-    <!-- Login -->
     <img src="C:\Deni\Clinics\Resume\venv\Final\logo.png" alt="Logo" class="logo1">
     <div class="container">
         <div class="logo">
@@ -405,7 +404,6 @@
         <p>Developed by Team <strong>ISS057</strong> | AI-Powered Resume Analysis</p>
     </div>
 
-    <!-- Register -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeRegisterModal()">×</span>
@@ -489,7 +487,6 @@
             clearError('confirmPassword');
         }
 
-        // Password visibility toggle
         function togglePasswordVisibility(inputId, toggleId) {
             const passwordInput = document.getElementById(inputId);
             const toggleIcon = document.getElementById(toggleId);
@@ -512,7 +509,6 @@
             });
         }
 
-        // Initialize password toggles
         togglePasswordVisibility('password', 'toggleLoginPassword');
         togglePasswordVisibility('newPassword', 'toggleNewPassword');
         togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
@@ -562,7 +558,6 @@
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Clear previous errors
             clearError('username');
             clearError('password');
             clearError('newUsername');

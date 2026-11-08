@@ -11,17 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+    <style>        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
         :root {
-            --primary-color: #60a5fa; /* Light blue */
-            --secondary-color: #93c5fd; /* Lighter blue */
-            --accent-color: #dbeafe; /* Very light blue */
-            --text-primary: #1e293b; /* Dark slate for text */
-            --text-secondary: #64748b; /* Lighter slate for secondary text */
-            --bg-primary: #f8fafc; /* Near-white background */
-            --bg-secondary: #e2e8f0; /* Light gray for subtle contrast */
+            --primary-color: #60a5fa;
+            --secondary-color: #93c5fd;
+            --accent-color: #dbeafe;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #e2e8f0;
         }
 
         body {
@@ -38,14 +37,14 @@
             margin: 0 auto;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
 
         .sidebar {
             width: 35%;
             background: var(--primary-color);
-            color: var(--text-primary); /* Changed to dark text for readability */
+            color: var(--text-primary);
             padding: 30px;
         }
 
@@ -140,12 +139,11 @@
             .sidebar { background: white; color: var(--text-primary); }
         }
 
-        /* Style the home button */
         .home-btn {
             display: flex;
-            align-items: center; /* Vertically centers icon and text */
-            justify-content: center; /* Horizontally centers content inside button */
-            background-color: white; /* Turquoise from body gradient */
+            align-items: center;
+            justify-content: center;
+            background-color: white;
             color: var(--primary-color);
             border: none;
             padding: 10px 20px;
@@ -154,15 +152,15 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 20px auto; /* Centers button horizontally and adds spacing */
+            margin: 20px auto;
         }
 
         .home-btn i {
-            margin-right: 8px; /* Space between icon and text */
+            margin-right: 8px;
         }
 
         .home-btn:hover {
-            background-color: var(--primary-color); /* Darker blue on hover */
+            background-color: var(--primary-color);
             color: white;
         }
 
@@ -193,7 +191,6 @@
         <h2 class="right" id="datetime"></h2>
     </nav>
 
-    <!-- Home Button Outside Navbar -->
     <button class="home-btn" onclick="window.location.href='C:\\Deni\\Clinics\\Resume\\venv\\Final\\home.html'">
         <i class="fas fa-home"></i> Home
     </button>
@@ -315,7 +312,7 @@
                 scale: 2,
                 useCORS: true,
                 allowTaint: false,
-                backgroundColor: null /* Preserve background colors */
+                backgroundColor: null
             };
 
             html2canvas(element, options).then(canvas => {
@@ -324,9 +321,9 @@
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 
-                const pageWidth = 210;    // A4 width in mm
-                const pageHeight = 297;   // A4 height in mm
-                const padding = 10;       // 10mm padding on all sides
+                const pageWidth = 210;
+                const pageHeight = 297;
+                const padding = 10;
                 
                 const contentWidth = pageWidth - (2 * padding);
                 const contentHeight = canvas.height * contentWidth / canvas.width;
@@ -350,7 +347,7 @@
                     position = -heightLeft + padding;
                     pdf.addImage(
                         base64image, 
-                        'PNG', /* Use PNG to retain colors */
+                        'PNG',
                         padding, 
                         position, 
                         contentWidth, 

@@ -1,4 +1,3 @@
-# Importing
 from flask import Flask, request, render_template, jsonify
 import os
 import base64
@@ -11,14 +10,12 @@ import bcrypt
 import pdfplumber
 from sentence_transformers import SentenceTransformer, util
 
-# Load BERT model
 model_ats = SentenceTransformer("all-MiniLM-L6-v2")
 
 app = Flask(__name__)
-CORS(app) # Avoid Blocking
+CORS(app)
 
 
-# Chatbot
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.get_json()
@@ -36,12 +33,10 @@ def chat():
     
     return jsonify({'response': bot_response})
 
-# MongoDB connection
 client = MongoClient('mongodb://localhost:27017/')
 db_user = client['Login']
 users_collection = db_user['users']
 
-# Initialize default user if collection is empty
 def init_default_user():
     if users_collection.count_documents({}) == 0:
         hashed_password = bcrypt.hashpw('User@123'.encode('utf-8'), bcrypt.gensalt())
@@ -53,7 +48,6 @@ def init_default_user():
 
 init_default_user()
 
-# Login Check
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -70,7 +64,6 @@ def login():
     
     return jsonify({'success': True, 'username': username})
 
-# Register Storage
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -80,7 +73,6 @@ def register():
     if users_collection.find_one({'username': username}):
         return jsonify({'success': False, 'error': 'newUsername', 'message': 'Username already exists'}), 400
 
-    # Password validation
     password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$'
     import re
     if not re.match(password_regex, password):
@@ -100,8 +92,6 @@ def register():
     return jsonify({'success': True})
 
 
-
-# MongoDB Connection
 client = MongoClient("mongodb://localhost:27017/")
 db = client["User"]
 collection = db["users"]
@@ -109,7 +99,6 @@ collection = db["users"]
 os.environ["GEMINI_API_KEY"] = "Your_Gemini_API_Key"
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-# AI Model Configuration
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -123,11 +112,9 @@ model = genai.GenerativeModel(
 )
 
 
-# Details Storing and Generate Resume
 @app.route("/resume", methods=["POST"])
 @cross_origin()
 def generate_resume():
-    # Extract user details
     full_name = request.json.get("name", "")
     email = request.json.get("email", "")
     phone_number = request.json.get("phone", "")
@@ -145,7 +132,6 @@ def generate_resume():
     languages = request.json.get("languages", [])
     template = request.json.get("template", "")
 
-    # Process Image (Convert Base64 to JPEG)
     image = request.json.get("image", "")
     if image:
         image_data = image.split(",")[1]
@@ -160,14 +146,12 @@ def generate_resume():
     else:
         jpeg_image = ""
 
-    # Generate About Me Section using Gemini AI
     about_me_prompt = f"""
     Write a concise and ATS-friendly professional summary in 3-5 lines for {full_name}, a {role}. Incorporate key skills: {', '.join(skills)} naturally within the text.Include Self Intro like "I am .."  at first .Avoid headings, quotations, and bullet points.
     """
     response = model.start_chat().send_message(about_me_prompt)
     about_me = response.text
 
-    # Generate Project, Experience, Internship Summaries
     generated_project_summaries = [
     model.start_chat().send_message(
         f"Write a 3-4 line professional summary from my prespective(I am) for the project '{p['title']}' which involved '{p['technologies']}' with '{p['description']}'. Describe its purpose, key contributions and impact concisely without bullet points or heading ."
@@ -193,12 +177,10 @@ def generate_resume():
         for i in internships
     ]
 
-    # Combine data
     combined_experiences = [{'work': e, 'summary': s} for e, s in zip(work_experience, generated_experience_summaries)]
     combined_projects = [{'project': p, 'summary': s} for p, s in zip(projects, generated_project_summaries)]
     combined_internships = [{'internship': i, 'summary': s} for i, s in zip(internships, generated_internship_summaries)]
 
-    # Create a dictionary to store all user details
     user_data = {
         "full_name": full_name,
         "email": email,
@@ -220,10 +202,8 @@ def generate_resume():
         "template": template
     }
 
-    # Insert the data into MongoDB
     collection.insert_one(user_data)
     print("Data Stored Successfully")
-    # Print the data
     print(f"Full Name: {full_name}")
     print(f"Email: {email}")
     print(f"Phone: {phone_number}")
@@ -245,7 +225,6 @@ def generate_resume():
     print(f"Combined Internships: {combined_internships}")
     print(f"Template: {template}")
 
-    # Render HTML Resume
     if template=="resume1":
         return render_template(
             "Resume_Template1.html",
@@ -313,12 +292,10 @@ def generate_resume():
         )
 
 
-# ATS
 def extract_text_from_pdf(file):
     """Extract text from a PDF file object in memory."""
     text = ""
     try:
-        # Use io.BytesIO to treat the file content as a file-like object in memory
         with pdfplumber.open(io.BytesIO(file.read())) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
@@ -334,17 +311,14 @@ def generate_feedback(resume_text, job_description, model_score):
     job_keywords = set(job_description.lower().split())
     resume_keywords = set(resume_text.lower().split())
     
-    # Calculate key metrics
     missing_keywords = job_keywords - resume_keywords
     matching_keywords = job_keywords & resume_keywords
     match_percentage = (len(matching_keywords) / len(job_keywords)) * 100 if job_keywords else 0
     resume_word_count = len(resume_text.split())
-    score_percentage = model_score * 100  # Convert model score (0-1) to percentage
+    score_percentage = model_score * 100
     
-    # Initialize feedback list
     feedback_parts = []
 
-    # Feedback based on keyword match percentage
     if match_percentage >= 80:
         feedback_parts.append("Awesome! Your resume looks like a great fit for this job based on keywords.")
     elif match_percentage >= 50:
@@ -354,19 +328,16 @@ def generate_feedback(resume_text, job_description, model_score):
     else:
         feedback_parts.append("It looks like your resume might need more tailoring to match the job’s keywords.")
 
-    # Feedback on missing keywords
     if missing_keywords:
         feedback_parts.append(f"Try sprinkling in these words to boost your fit: {', '.join(sorted(missing_keywords))}.")
     else:
         feedback_parts.append("You’ve nailed it—no important words are missing from the job description!")
 
-    # Feedback on matching keywords
     if matching_keywords:
         feedback_parts.append(f"You’re already rocking words like {', '.join(sorted(list(matching_keywords)[:3]))}—keep it up!")
     else:
         feedback_parts.append("We couldn’t find any key words from the job in your resume yet.")
 
-    # Feedback based on model score
     if score_percentage >= 80:
         feedback_parts.append("Fantastic! The deeper analysis shows your resume is a super strong match for this role.")
     elif score_percentage >= 60:
@@ -376,7 +347,6 @@ def generate_feedback(resume_text, job_description, model_score):
     else:
         feedback_parts.append("Heads up! The deeper analysis thinks your resume could use more work to align with this job.")
 
-    # Feedback based on resume length
     if resume_word_count < 100:
         feedback_parts.append("Your resume’s a little short. Adding more details could help it stand out!")
     elif resume_word_count > 500:
@@ -384,7 +354,6 @@ def generate_feedback(resume_text, job_description, model_score):
     else:
         feedback_parts.append("The length of your resume feels just right—nice balance!")
 
-    # Combine feedback into a single string
     feedback = " ".join(feedback_parts)
     return feedback
 
@@ -407,7 +376,7 @@ def rank_resumes(resume_files, job_description):
         print(f"Resume: {file.filename} | Score: {score}")
 
         resume_scores[file.filename] = score
-        resume_feedback[file.filename] = generate_feedback(resume_text, job_description, score)  # Pass score here
+        resume_feedback[file.filename] = generate_feedback(resume_text, job_description, score)
 
     ranked_resumes = sorted(resume_scores.items(), key=lambda x: x[1], reverse=True)
     return ranked_resumes, resume_feedback

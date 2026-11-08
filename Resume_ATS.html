@@ -17,7 +17,7 @@
             position: fixed;
             top: 20px;
             right: 50px;
-            width: 100px; /* Adjust size as needed */
+            width: 100px;
             height: auto;
             z-index: 1001;
             animation: pulse 2s infinite;
@@ -31,7 +31,7 @@
 
         @media (max-width: 768px) {
             .logo {
-                width: 100px; /* Adjust size for smaller screens */
+                width: 100px;
                 right: 15px;
             }
         }
@@ -41,7 +41,7 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #9B5DE5 0%, #F15BB5 50%, #00BBF9 100%);
             color: #37474F;
-            padding: 50px 20px 20px; /* Reduced bottom padding */
+            padding: 50px 20px 20px;
             line-height: 1.7;
             position: relative;
             overflow-x: hidden;
@@ -133,7 +133,7 @@
 
         input:focus {
             border-color: #F15BB5;
-            box-shadow: 0 8px 25px rgba(241, 91, 181, 0.3); /* Updated to match #F15BB5 */
+            box-shadow: 0 8px 25px rgba(241, 91, 181, 0.3);
             transform: scale(1.02);
         }
 
@@ -153,7 +153,7 @@
             margin-right: 20px;
             transition: all 0.4s ease;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(155, 93, 229, 0.3); /* Updated to match #9B5DE5 */
+            box-shadow: 0 4px 15px rgba(155, 93, 229, 0.3);
         }
 
         input[type="file"]::-webkit-file-upload-button:hover {
@@ -226,7 +226,7 @@
         }
 
         .result h2 {
-            color: #9B5DE5; /* Updated to match theme */
+            color: #9B5DE5;
             font-size: 32px;
             margin-bottom: 30px;
             padding-left: 25px;
@@ -272,7 +272,7 @@
         }
 
         .feedback strong {
-            color: #9B5DE5; /* Removed gradient, set to solid color for consistency */
+            color: #9B5DE5;
             font-size: 1.2em;
         }
 
@@ -284,16 +284,16 @@
         .footer {
             text-align: center;
             margin-top: 60px;
-            margin-bottom: 0; /* Remove extra space below footer */
+            margin-bottom: 0;
             color: black;
             font-size: 26px;
             position: relative;
             z-index: 1;
-            padding-bottom: 20px; /* Ensure some padding inside footer */
+            padding-bottom: 20px;
         }
 
         .footer strong {
-            color: #9B5DE5; /* Updated to match theme */
+            color: #9B5DE5;
             font-weight: 700;
             background: linear-gradient(45deg, #39FF14, #FFFF00, #FF6B6B);
             -webkit-background-clip: text;
@@ -333,7 +333,7 @@
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             max-height: 200px;
             overflow-y: auto;
         }
@@ -342,15 +342,15 @@
             margin: 8px 0;
             padding: 5px 10px;
             border-radius: 3px;
-            transition: background-color 0.2s ease; /* Smooth hover effect */
+            transition: background-color 0.2s ease;
         }
 
         .file-list p:hover {
-            background-color: #e9ecef; /* Light gray on hover */
-            cursor: default;           /* Indicates it's not clickable */
+            background-color: #e9ecef;
+            cursor: default;
         }
         .file-list p:before {
-            content: "•";               /* Bullet point */
+            content: "•";
             transform: translateY(-50%);    
             left: 15px;
             overflow-y: auto;
@@ -370,7 +370,7 @@
             letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 5px; /* Space between icon and text */
+            gap: 5px;
             transition: all 0.3s ease;
             left: 325px;
         }
@@ -409,7 +409,6 @@
         document.getElementById("resumeForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Get form elements
     const jobDescriptionInput = document.getElementById("job_description");
     const resumeInput = document.getElementById("resume");
     const jobDescriptionError = document.getElementById("job_description_error");
@@ -417,7 +416,6 @@
     const jobDescriptionContainer = jobDescriptionInput.parentElement;
     const resumeContainer = resumeInput.parentElement;
 
-    // Reset previous error states
     jobDescriptionError.style.display = "none";
     resumeError.style.display = "none";
     jobDescriptionContainer.classList.remove("error");
@@ -425,7 +423,6 @@
 
     let isValid = true;
 
-    // Validate job description
     if (!jobDescriptionInput.value.trim()) {
         jobDescriptionError.textContent = "Please enter a job description.";
         jobDescriptionError.style.display = "block";
@@ -433,7 +430,6 @@
         isValid = false;
     }
 
-    // Validate resume files
     if (resumeInput.files.length === 0) {
         resumeError.textContent = "Please upload at least one PDF resume.";
         resumeError.style.display = "block";
@@ -455,12 +451,11 @@
         return;
     }
 
-    // Prepare form data
     const formData = new FormData();
     formData.append("job_description", jobDescriptionInput.value);
     const files = resumeInput.files;
     for (let i = 0; i < files.length; i++) {
-        formData.append("resumes", files[i]); // 'resumes' supports multiple files
+        formData.append("resumes", files[i]);
     }
 
     try {
@@ -496,16 +491,16 @@
     });
 
     document.getElementById("resume").addEventListener("change", function () {
-        const fileList = document.getElementById("file-list"); // Target the display div, not the input
+        const fileList = document.getElementById("file-list");
         const files = this.files;
 
-        fileList.innerHTML = ""; // Clear previous list
+        fileList.innerHTML = "";
 
         if (files.length > 0) {
             Array.from(files).forEach(file => {
-                const fileNameElement = document.createElement("p"); // Create a new <p> for each file
-                fileNameElement.textContent = "\xa0"+file.name; // Set the file name
-                fileList.appendChild(fileNameElement); // Add it to the file-list div
+                const fileNameElement = document.createElement("p");
+                fileNameElement.textContent = "\xa0"+file.name;
+                fileList.appendChild(fileNameElement);
             });
         }
     });
